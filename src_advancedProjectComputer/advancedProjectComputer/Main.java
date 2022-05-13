@@ -19,25 +19,18 @@ public class Main {
 				admin=system.letAdminSignin();
 			}
 			System.out.println("please select the what you want to do ");
-			System.out.println("1:Manage Category");
-			System.out.println("2:Manage Events");
-			System.out.println("3:sign out");
+			System.out.println("1:Manage Events");
+			System.out.println("2:sign out");
 			switch (scanner.nextInt()) {
-			case 1: {
-				
-				
-				system.letAdminControlCategory(admin);
-				
-				break;
-			}
 			
-			case 2: {
+			
+			case 1: {
 				system.letAdminControlEvent(admin);
 				
 			break;	
 			}
 			
-			case 3: {
+			case 2: {
 				
 				system.letAdminSignout(admin);
 				
@@ -57,28 +50,17 @@ public class Main {
 				employee=system.letEmployeeStart();
 			}
 			System.out.println("please select the what you want to do ");
-			System.out.println("1:Manage Client");
-			System.out.println("2:Manage Events");
-			System.out.println("3:sign out");
+			System.out.println("1:Mange your activity");
+			System.out.println("2:sign out");
 			switch (scanner.nextInt()) {
 			case 1: {
-				
-				
-				system.letEmployeeControlClient(employee);
-				
-				break;
+				system.letEmployeeControlEvent(employee);
+				break;	
 			}
 			
 			case 2: {
-				system.letEmployeeControlEvent(employee);
-				
-			break;	
-			}
-			
-			case 3: {
-				
+
 				system.letEmployeeSignout(employee);
-				
 				break;
 			}
 			

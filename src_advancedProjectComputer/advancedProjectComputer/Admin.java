@@ -19,7 +19,6 @@ public class Admin extends Person {
 		account.setUserName(userName);
 		account.setPassword(password);
 		
-		System.out.println("You've registerd successfully !!");
 	}
 	public Account getAccount() {
 		
@@ -40,58 +39,16 @@ public class Admin extends Person {
 		}
 		else System.out.println("you are not signed in");
 	}
-	public Category addCategory() {
-		
-		if(adminLoginFlag == true) {
-			Category categ1 = new Category();
-			System.out.println("Adding new categoty...");
-			System.out.println("Enter category type:");
-			categ1.setType(adminInput.next());
-			System.out.println("Added succesfully!");
-			return categ1;
-		}
-		else {
-			System.out.println("You are not signed in.");
-			return null;
-		}
-		
-	}
-	public void editCategory(Category cat1) {
-		System.out.println("Current type of category is: "+ cat1.getType());
-		System.out.println("Enter new category type:");
-		cat1.setType(adminInput.nextLine());
-		System.out.println("Succefully edited!");
-	}
-	public void deleteCategory(Category cat1,ArrayList<Category> categories) {
-		
-	if(adminLoginFlag==true)	{
-		for(int i=0;i<categories.size();i++) {
-		
-			if(categories.get(i).equals(cat1)) {
-				categories.remove(i);
-				break;
-			}
-		}
-		
-		cat1 = null;
-		System.out.println("Successfully deleted category.");
-	}
-	else {
-		System.out.println("you are not signed in");
-	  }
-	}
-	public Event addEvent(Category category) {
+
+	public Event addEvent() {
 		Event event1 = new Event();
 		if(adminLoginFlag == true) {
 			System.out.println("Adding new event...");
-			
-			event1.setCategory(category);
 			System.out.println("Enter event title:");
 			event1.setTitle(adminInput.nextLine());
 			System.out.println("Enter event location:");
 			event1.setLocation(adminInput.nextLine());
 			System.out.println("Enter event date YYYY-MM-DD :");
-			
 			event1.setDate(LocalDate.parse(adminInput.nextLine()));
 			System.out.println("Enter event start time:");
 			event1.setStartTime(LocalTime.parse(adminInput.nextLine()));

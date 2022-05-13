@@ -17,9 +17,8 @@ public class TicketReservationSystem {
 	
 	ArrayList<Admin> admines = new ArrayList<Admin>();
 	
-	ArrayList<Client> clients = new ArrayList<Client>();
 	
-	ArrayList<Category> categories = new ArrayList<Category>();
+	
 	
 	ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -31,28 +30,13 @@ public class TicketReservationSystem {
 		Employee dummyEmployee1=new Employee();
 		
 		employees.add(dummyEmployee1);
-		dummyEmployee1.registerAccount("dummy1", "dummy1");
+		dummyEmployee1.registerAccount("dummy1", "dummy1","dummy1","01011111111",'M');
 		
 		employees.add(dummyEmployee1);
 
 		dummyAdmin1.registerAccount("dummy1", "dummy1");
 		
-		admines.add(dummyAdmin1);
-		
-
-
-		Category categ1 = new Category();
-		
-		categ1.setType("moviee");
-		categories.add(categ1);
-
-		Category categ2 = new Category();
-		
-		categ2.setType("match");
-		categories.add(categ2);
-		
-
-		
+		admines.add(dummyAdmin1);		
 		Event event1 = new Event();
 		event1.setTitle("spiderman");
 		event1.setLocation("vox cinema");
@@ -61,9 +45,7 @@ public class TicketReservationSystem {
 		event1.setEndTime(LocalTime.of(11,30 ));
 		event1.setDescription("bad moviee");
 		event1.setAvailbleTickets(30);
-		event1.setCategory(categ1);
 		events.add(event1);
-	
 		
 		
        Event event2 = new Event();	
@@ -74,29 +56,7 @@ public class TicketReservationSystem {
        event2.setEndTime(LocalTime.of(11,30 ));
        event2.setDescription("good moviee");
        event2.setAvailbleTickets(30);
-       event2.setCategory(categ1);
 		events.add( event2);
-		
-	       Event event3 = new Event();	
-	       event3 .setTitle("sharkia lldokhan vs m3sl elslom");
-	       event3 .setLocation("abo attata");
-	       event3 .setDate(LocalDate.of(2022, 10, 9));
-	       event3 .setStartTime(LocalTime.of(10,30 ));
-	       event3 .setEndTime(LocalTime.of(11,30 ));
-	       event3 .setDescription("worst match ever waste for your money");
-	       event3 .setAvailbleTickets(11);
-	       event3 .setCategory(categ2);
-			events.add( event3);
-		
-			Client client =new Client();
-			client.setName("Ahmed");
-			client.setMobile("01011111111");
-			client.setGender('M');
-			client.setSerialNumber();
-			client.setNationalID("3020503030");
-			
-			clients.add(client);
-			
 			
 	}
 	
@@ -134,49 +94,7 @@ public class TicketReservationSystem {
 		
 	}
 	
-	public void letAdminControlCategory(Admin currentAdmin) {
-		System.out.println("Please insert the one of the following numbers" );
-		System.out.println("1: Add category");
-		System.out.println("2: Edit category");
-		System.out.println("3: Delete category");
-		
-	switch(input.nextInt()) {	
-	case 1:{
-		categories.add(currentAdmin.addCategory());
-		break;
-	}
-	case 2:{
-		System.out.println("Please insert the Category  you wish to edit");
-		String catType = input.next();
-		for (int i = 0; i < categories.size(); i++) {
-			
-		      if(categories.get(i).getType() .equals(catType)) {
-		    	  
-		    	  currentAdmin.editCategory(categories.get(i));
-		    	  break;  
-		      }
-		      
-		
-		
-	}break;
-	}
-	case 3:{
-		System.out.println("Please insert the Category  you wish to delete");
-		String catType = input.next();
-		for (int i = 0; i < categories.size(); i++) {
-			
-		      if(categories.get(i).getType() .equals(catType)) {
-		    	  
-		    	  currentAdmin.deleteCategory(categories.get(i), categories);
-		    	  break;  
-		      }
-	  }break;
-	}
-	default:
-		System.out.println("Invalid input");
-		
-	  }
-	}
+	
 
 	public void letAdminControlEvent(Admin currentAdmin) {
 		
@@ -190,18 +108,8 @@ public class TicketReservationSystem {
 	switch(input.nextInt()) {	
 	
 	case 1:{
-		System.out.println("Please insert the category  you wish to add event of it");
-		String catTypeString=input.next();
-		for (int i = 0; i < categories.size(); i++) {
 		
-			if(events.get(i).getTitle() .equals(catTypeString)) {
-	    	  
-				events.add(currentAdmin.addEvent(categories.get(i)));
-	    	  break;  
-	      }
-	      
-		
-		}	
+		events.add(currentAdmin.addEvent());
 		break;
 	}
 		
@@ -247,7 +155,7 @@ public class TicketReservationSystem {
 	public Employee letEmployeeStart() {
 		
 		
-System.out.println("Do you Already have an Account (Y/N) : ");
+       System.out.println("Do you Already have an Account (Y/N) : ");
 		
 		char checkChar2=input.next().charAt(0);
 		if(checkChar2=='Y') {
@@ -282,12 +190,19 @@ System.out.println("Do you Already have an Account (Y/N) : ");
 		else if (checkChar2=='N') {
 			
 			System.out.println("creating a new account ");
+			
+			System.out.println("plese insert your name");
+			String name=input.nextLine();
 			System.out.println("insert your user name ");
 			String userName =input.next();
 			System.out.println("insert your password ");
 			String password =input.next();
+			System.out.println("insert your mobile number ");
+			String mobile =input.next();
+			System.out.println("insert your Gender (M/F) ");
+			char g =input.next().charAt(0);
 			Employee newEmployee= new Employee();
-			newEmployee.registerAccount(userName, password);
+			newEmployee.registerAccount(name,userName, password,mobile,g);
 			employees.add(newEmployee);
 			
 			Employee currentEmployee= new Employee();
@@ -324,105 +239,6 @@ System.out.println("Do you Already have an Account (Y/N) : ");
 		
 	}
 	
-	public void letEmployeeControlClient(Employee currentEmployee) {
-		
-		System.out.println("Please insert the one of the following numbers" );
-		System.out.println("1: Add client");
-		System.out.println("2: Delete client");
-		System.out.println("3: search client by name");
-		System.out.println("4: search client by serial number");
-		System.out.println("5: book event for client ");
-		System.out.println("6: unbook event for client");
-		
-		
-		
-		
-		switch (input.nextInt()) {
-
-		case 1: {
-			
-			
-			currentEmployee.addClient(clients);
-			break;
-		}
-		
-		
-		case 2: {
-			
-			System.out.println("Please insert the name of the client you wish to edit his information");
-			String clientName = input.next();
-			for (int i = 0; i < clients.size(); i++) {
-				
-			      if(clients.get(i).getName() .equals(clientName)) {
-			    	  
-			    	 currentEmployee.deleteClient(clients.get(i), clients);
-			    	  break;  
-			      }
-			      
-			}
-			
-			
-			break;
-		}
-		
-		
-		
-		case 3: {
-			
-			System.out.println("Please insert the name of the client ");
-			String clientName = input.next();
-			currentEmployee.getClientByName(clientName, clients);
-			
-			break;
-		}
-		
-		case 4: {
-			
-			System.out.println("Please insert the serial number of the client ");
-			int clientNumber = input.nextInt();
-			currentEmployee.getClientBySerial(clientNumber, clients);
-			
-			break;
-		}
-		
-		case 5: {
-			
-			
-			
-			
-			
-			System.out.println("please insert name of the client you want to book for him then name of event :");
-			
-			
-			
-			currentEmployee.bookEvent(currentEmployee.getClientByName(input.next(), clients), currentEmployee.findEvent(input.next(), events));
-			
-			
-			break;
-		}
-		
-		case 6: {
-			
-			
-
-			
-			
-			System.out.println("please insert name of the client you want to unbook for him  and the event:");
-		
-			currentEmployee.unbookEvent(currentEmployee.getClientByName(input.next(), clients), currentEmployee.findEvent(input.next(), events));
-			
-			
-			break;
-		}
-		
-		default: 
-			System.out.println("Invalid input");
-			
-		}
-		
-	}
-		
-	
 
 	public void letEmployeeControlEvent(Employee currentEmployee) {
 		
@@ -455,6 +271,19 @@ System.out.println("Do you Already have an Account (Y/N) : ");
 			
 		}
 		
+		case 3: {
+			
+			System.out.println("please insert name of the client you want to book for him then name of event :");
+			currentEmployee.bookEvent(currentEmployee.findEvent(input.next(), events));
+			break;
+		}
+		
+		case 4: {
+
+			System.out.println("please insert name of the client you want to unbook for him  and the event:");
+			currentEmployee.unbookEvent(currentEmployee.findEvent(input.next(), events));
+			break;
+		}
 		default:
 			
 			System.out.println("wrong choise  ");

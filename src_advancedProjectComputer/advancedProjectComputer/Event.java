@@ -16,11 +16,11 @@ public class Event {
 	private LocalTime startTime;
 	private LocalTime endTime ;
 	
-	private Category category;
+	
 	
 	
 	Event(){
-		
+	//	setTitle("intiate events");
 	}
 
 	public String getTitle() {
@@ -63,14 +63,8 @@ public class Event {
 		this.endTime = endTime;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
+	
+	
 	public int getAvailbleTickets() {
 		return availbleTickets;
 	}
